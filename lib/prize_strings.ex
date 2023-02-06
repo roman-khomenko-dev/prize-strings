@@ -25,10 +25,14 @@ defmodule PrizeStrings do
       f -> t
   """
 
-  def solve(days \\ 30) when is_integer(days) do
-    types_value = %{n: 1, t: 3, a: 0, b: 2, c: 1, d: 0, e: 0, f: 1}
+  @types_value %{n: 1, t: 3, a: 0, b: 2, c: 1, d: 0, e: 0, f: 1}
 
-    result = Enum.reduce(1..days-1, types_value, fn _x, acc ->
+  def solve(days = 1) do
+    {:ok, "Prize Strings over a #{days}-day period is #{inspect(@types_value.t)}"}
+  end
+
+  def solve(days \\ 30) when is_integer(days) do
+    result = Enum.reduce(1..days-1, @types_value, fn _x, acc ->
       transform(acc)
     end)
 
